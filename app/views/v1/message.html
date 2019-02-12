@@ -1,0 +1,72 @@
+
+{% extends "layout.html" %}
+
+{% block beforeContent %}
+  {{ govukPhaseBanner({
+    tag: {
+      text: "alpha"
+    },
+    html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Contact us for help</h1>
+
+    <form action="/v1/confirmation">
+        {% from "textarea/macro.njk" import govukTextarea %}
+
+        {{ govukTextarea({
+          name: "what",
+          id: "what",
+          label: {
+            classes: 'govuk-label--m',
+            text: "What do you need help with?"
+          }
+        }) }}
+
+        {{ govukInput({
+          name: "ref",
+          id: "ref",
+          label: {
+            classes: 'govuk-label--m',
+            text: "Case reference number (if applicable)"
+          },
+          classes: "govuk-input--width-10"
+        }) }}
+
+        {{ govukInput({
+          name: "email",
+          id: "email",
+          label: {
+            classes: 'govuk-label--m',
+            text: "Your email address"
+          },
+          classes: "govuk-input--width-20"
+        }) }}
+
+        {{ govukInput({
+          name: "tel",
+          id: "tel",
+          label: {
+            classes: 'govuk-label--m',
+            text: "Your telephone number"
+          },
+          type: 'tel',
+          classes: "govuk-input--width-10"
+        }) }}
+
+        <p class="govuk-body">Responses can take up to 10 working days.</p>
+
+        {{govukButton({
+          text: 'Send message'
+        })}}
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
